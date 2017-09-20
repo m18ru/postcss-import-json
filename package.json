@@ -1,0 +1,58 @@
+{
+  "name": "postcss-import-json",
+  "version": "0.1.0",
+  "description": "PostCSS plugin to import variables from JSON file",
+  "author": "Andrey Avol Volynkin <code@m18.ru>",
+  "license": "MIT",
+  "homepage": "https://github.com/m18ru/postcss-import-json#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m18ru/postcss-import-json.git"
+  },
+  "bugs": {
+    "url": "https://github.com/m18ru/postcss-import-json/issues"
+  },
+  "keywords": [
+    "postcss-plugin",
+    "postcss",
+    "css",
+    "import",
+    "json",
+    "partial",
+    "import-json",
+    "variables",
+    "variable"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "test": "npm run lint && npm run test:main",
+    "test:main": "cross-env TS_NODE_PROJECT=test/tsconfig.json mocha --compilers ts:ts-node/register",
+    "lint:scripts-project": "tslint -c tslint-type-check.json -p tsconfig.json --type-check",
+    "lint:scripts-other": "tslint \"{*.js,src/*.d.ts,test/*.ts}\"",
+    "lint": "npm run lint:scripts-project && npm run lint:scripts-other",
+    "clean": "rimraf lib",
+    "build": "tsc",
+    "prepublishOnly": "npm run test",
+    "prepare": "npm run clean && npm run build"
+  },
+  "dependencies": {
+    "postcss": "^6.0.11"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.43",
+    "@types/node": "^8.0.28",
+    "chai": "^4.1.2",
+    "cross-env": "^5.0.5",
+    "mocha": "^3.5.3",
+    "rimraf": "^2.6.2",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.7.0",
+    "tslint-config-m18": "^1.6.2",
+    "typescript": "^2.5.2"
+  }
+}
