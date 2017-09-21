@@ -40,7 +40,8 @@
     "prepare": "npm run clean && npm run build"
   },
   "dependencies": {
-    "postcss": "^6.0.11"
+    "postcss": "^6.0.11",
+    "ts-fs": "^0.1.0"
   },
   "devDependencies": {
     "@types/chai": "^4.0.4",
