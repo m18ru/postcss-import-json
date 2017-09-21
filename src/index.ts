@@ -106,7 +106,7 @@ function main( userOptions: Partial<PluginOptions> ): Transformer
 /**
  * PostCSS plugin.
  */
-const postImportJsonPlugin: Plugin<PluginOptions> = plugin(
+const postImportJsonPlugin: Plugin<Partial<PluginOptions>> = plugin(
 	PLUGIN_NAME,
 	main,
 );
