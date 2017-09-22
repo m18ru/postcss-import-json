@@ -61,7 +61,7 @@ function injectVariable(
 	
 	const variableNode = decl( {prop: name, value: String( value )} );
 	variableNode.source = rule.source;
-	rule.parent.insertBefore( rule, variable );
+	rule.parent.insertBefore( rule, variableNode );
 }
 
 /**
