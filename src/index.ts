@@ -58,6 +58,8 @@ function main( userOptions: Partial<PluginOptions> ): Transformer
 	
 	options.root = resolve( options.root );
 	
+	const resultPromises: Array<Promise<void>> = [];
+	
 	const onAtRule = ( rule: AtRule ): void =>
 	{
 		let params: ParsedParams;
@@ -87,7 +89,7 @@ function main( userOptions: Partial<PluginOptions> ): Transformer
 			rule.remove();
 		};
 		
-		resolveUri(
+		const promise = resolveUri(
 			params.uri,
 			getCssBaseDir( rule ),
 			options,
@@ -95,11 +97,15 @@ function main( userOptions: Partial<PluginOptions> ): Transformer
 			.then( readJson )
 			.then( onContent )
 			.catch( onError );
+		
+		resultPromises.push( promise );
 	};
 	
-	return ( root: Root ): void =>
+	return ( root: Root ): Promise<void[]> =>
 	{
 		root.walkAtRules( RULE_NAME, onAtRule );
+		
+		return Promise.all( resultPromises );
 	};
 }
 
