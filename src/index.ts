@@ -1,4 +1,3 @@
-import {resolve} from 'path';
 import {AtRule, plugin, Plugin, Root, Transformer} from 'postcss';
 import getCssBaseDir from './getCssBaseDir';
 import injectVariables from './injectVariables';
@@ -20,7 +19,6 @@ const RULE_NAME = 'import-json';
  */
 const DEFAULT_OPTIONS: Readonly<PluginOptions> = {
 	prefix: '$',
-	root: process.cwd(),
 };
 
 /**
@@ -32,10 +30,6 @@ export interface PluginOptions
 	 * Default variable prefix.
 	 */
 	prefix: string;
-	/**
-	 * The root directory where to resolve path.
-	 */
-	root: string;
 	/**
 	 * Custom path resolver.
 	 * 
@@ -55,8 +49,6 @@ export interface PluginOptions
 function main( userOptions: Partial<PluginOptions> ): Transformer
 {
 	const options: PluginOptions = {...DEFAULT_OPTIONS, ...userOptions};
-	
-	options.root = resolve( options.root );
 	
 	const resultPromises: Array<Promise<void>> = [];
 	
